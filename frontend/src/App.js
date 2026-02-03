@@ -4,7 +4,6 @@ import io from "socket.io-client";
 import "./App.css";
 
 // 🔴 CRITICAL FIX: Grab the library from the browser window
-// (Since we removed the import, we must define it here)
 const faceapi = window.faceapi;
 
 // --- DEPLOYMENT CONFIGURATION ---
@@ -62,7 +61,6 @@ function App() {
     const loadModels = async () => {
       const MODEL_URL = "/models";
       try {
-        // Double check faceapi exists before using it
         if (!faceapi) {
           console.error(
             "FaceAPI not found. Did you add the script to index.html?",
@@ -97,7 +95,6 @@ function App() {
 
     socket.on("partner_left", () => {
       // Optional: You could show a specialized UI here
-      // For now, the system message handles the notification
     });
 
     // Cleanup
@@ -151,7 +148,9 @@ function App() {
         };
         localStorage.setItem("klymo_user_profile", JSON.stringify(newProfile));
         setUserProfile(newProfile);
-        setResultMessage(`✅ Verified! Setup profile.`);
+
+        // 🟢 UPDATED: Show specific gender in success message
+        setResultMessage(`✅ Verified as ${genderText}! Setup profile.`);
         setStatusClass("result-success");
         setTimeout(() => setView("PROFILE"), 1500);
         return;
@@ -203,7 +202,7 @@ function App() {
       nickname: nickname,
       gender: userProfile.gender,
       genderFilter: filter,
-      deviceId: deviceId, // <--- Send Device ID for limits
+      deviceId: deviceId,
     });
   };
 
@@ -241,7 +240,8 @@ function App() {
   return (
     <div className="glass-container">
       {/* HEADER: UPDATED BRANDING */}
-      <h1>
+      {/* 🟢 FIXED: Forced color white on both Title and Subtitle */}
+      <h1 style={{ color: "white" }}>
         ZenTalk
         <span
           style={{
@@ -346,8 +346,8 @@ function App() {
               <button
                 onClick={() => {
                   setIsSearching(false);
-                  socket.emit("disconnect"); // Quick way to leave queue
-                  window.location.reload(); // Hard reset state
+                  socket.emit("disconnect");
+                  window.location.reload();
                 }}
                 style={{
                   marginTop: "20px",
