@@ -1,0 +1,352 @@
+/* --- RESET & VARIABLES --- */
+:root {
+  --primary: #6c5ce7;
+  --primary-glow: rgba(108, 92, 231, 0.4);
+  --success: #00b894;
+  --danger: #ff7675;
+  --dark-bg: #0f172a;
+  --glass-bg: rgba(15, 23, 42, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --text-main: #f1f2f6;
+  --text-muted: #a4b0be;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  background-color: #000;
+  background-image:
+    radial-gradient(
+      circle at 10% 20%,
+      rgba(108, 92, 231, 0.2) 0%,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 90% 80%,
+      rgba(0, 184, 148, 0.15) 0%,
+      transparent 40%
+    );
+  color: var(--text-main);
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* --- MAIN CONTAINER --- */
+.glass-container {
+  width: 100%;
+  max-width: 450px; /* Mobile app feel */
+  height: 90vh;
+  max-height: 850px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 0.6s ease-out;
+}
+
+h1 {
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: -1px;
+  margin-bottom: 20px;
+  background: linear-gradient(to right, #fff, #a4b0be);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+h2,
+h3 {
+  color: var(--text-main);
+  font-weight: 500;
+}
+p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* --- BUTTONS --- */
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 12px;
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-main);
+  border: 1px solid var(--glass-border);
+  width: 100%; /* Default full width */
+}
+
+button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+button.primary {
+  background: var(--primary);
+  box-shadow: 0 4px 15px var(--primary-glow);
+  border: none;
+}
+button.primary:hover {
+  background: #5a4dd1;
+}
+
+button.success {
+  background: var(--success);
+  color: #000;
+  box-shadow: 0 4px 15px rgba(0, 184, 148, 0.3);
+}
+
+/* --- INPUTS --- */
+input,
+textarea {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 14px;
+  color: #fff;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+  outline: none;
+}
+
+input:focus,
+textarea:focus {
+  border-color: var(--primary);
+}
+
+/* --- CAMERA & SCANNER EFFECT --- */
+.camera-frame {
+  flex: 1;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  background: #000;
+  margin-bottom: 20px;
+  border: 1px solid var(--glass-border);
+}
+
+/* The Cool Scanner Line Animation */
+.camera-frame::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--success);
+  box-shadow: 0 0 10px var(--success);
+  animation: scan 3s linear infinite;
+  opacity: 0.7;
+}
+
+.btn-group {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+/* --- LOBBY STYLES --- */
+.badge-secure {
+  background: rgba(0, 184, 148, 0.1);
+  color: var(--success);
+  border: 1px solid rgba(0, 184, 148, 0.2);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+/* --- CHAT INTERFACE --- */
+.chat-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--glass-border);
+  margin-bottom: 15px;
+}
+
+.chat-body {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-right: 5px;
+  /* Scrollbar styling */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+}
+
+.message {
+  max-width: 80%;
+  display: flex;
+  flex-direction: column;
+  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.message.you {
+  align-items: flex-end;
+  align-self: flex-end;
+}
+.message.other {
+  align-items: flex-start;
+  align-self: flex-start;
+}
+
+.msg-content {
+  padding: 10px 16px;
+  border-radius: 16px;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  position: relative;
+}
+
+/* Chat Bubble Colors */
+.you .msg-content {
+  background: var(--primary);
+  border-bottom-right-radius: 4px; /* Tail effect */
+}
+.other .msg-content {
+  background: rgba(255, 255, 255, 0.1);
+  border-bottom-left-radius: 4px; /* Tail effect */
+}
+
+.msg-meta p {
+  font-size: 0.7rem;
+  margin-top: 4px;
+  opacity: 0.6;
+}
+
+.chat-footer {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+}
+.chat-footer button {
+  width: auto;
+  padding: 0 20px;
+}
+
+/* --- UTILITIES --- */
+.result-box {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  padding: 10px 20px;
+  border-radius: 30px;
+  border: 1px solid var(--glass-border);
+  white-space: nowrap;
+  backdrop-filter: blur(10px);
+}
+.result-success h3 {
+  color: var(--success);
+  font-size: 0.9rem;
+}
+.result-error h3 {
+  color: var(--danger);
+  font-size: 0.9rem;
+}
+
+.loader {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+.reset-link {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+}
+.reset-link:hover {
+  color: var(--danger);
+}
+
+/* --- ANIMATIONS --- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes scan {
+  0% {
+    top: 0;
+  }
+  50% {
+    top: 100%;
+  }
+  100% {
+    top: 0;
+  }
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 600px) {
+  .glass-container {
+    height: 100vh;
+    max-height: none;
+    border-radius: 0;
+    border: none;
+  }
+}
