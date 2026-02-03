@@ -242,7 +242,7 @@ function App() {
     <div className="glass-container">
       {/* HEADER: UPDATED BRANDING */}
       <h1>
-        ARK
+        ARK-Chat
         <span
           style={{
             display: "block",
@@ -252,9 +252,7 @@ function App() {
             marginTop: "5px",
             opacity: "0.8",
           }}
-        >
-          Controlled Anonymity
-        </span>
+        ></span>
       </h1>
 
       {/* VIEW 1: VERIFICATION */}
