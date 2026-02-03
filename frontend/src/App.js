@@ -149,7 +149,7 @@ function App() {
         localStorage.setItem("klymo_user_profile", JSON.stringify(newProfile));
         setUserProfile(newProfile);
 
-        // 🟢 UPDATED: Show specific gender in success message
+        // 🟢 FEATURE: Tells you exactly which gender was detected
         setResultMessage(`✅ Verified as ${genderText}! Setup profile.`);
         setStatusClass("result-success");
         setTimeout(() => setView("PROFILE"), 1500);
@@ -240,7 +240,6 @@ function App() {
   return (
     <div className="glass-container">
       {/* HEADER: UPDATED BRANDING */}
-      {/* 🟢 FIXED: Forced color white on both Title and Subtitle */}
       <h1 style={{ color: "white" }}>
         ZenTalk
         <span
@@ -250,8 +249,10 @@ function App() {
             fontWeight: "300",
             letterSpacing: "2px",
             marginTop: "5px",
-            opacity: "0.8",
-            color: "white",
+            // 🟢 FIXED: Opacity removed (1) + Shadow added
+            opacity: "1",
+            color: "#ffffff",
+            textShadow: "0px 1px 3px rgba(0,0,0,0.8)",
           }}
         >
           Controlled Anonymity
