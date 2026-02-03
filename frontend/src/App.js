@@ -252,7 +252,9 @@ function App() {
             marginTop: "5px",
             opacity: "0.8",
           }}
-        ></span>
+        >
+          Controlled Anonymity
+        </span>
       </h1>
 
       {/* VIEW 1: VERIFICATION */}
