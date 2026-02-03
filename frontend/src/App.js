@@ -251,6 +251,7 @@ function App() {
             letterSpacing: "2px",
             marginTop: "5px",
             opacity: "0.8",
+            color: "white",
           }}
         >
           Controlled Anonymity
