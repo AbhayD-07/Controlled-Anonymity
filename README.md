@@ -3,7 +3,8 @@
 ZenTalk is a **real-time anonymous chat application** built with one simple idea in mind:
 
 > **People should be able to talk freely without giving away their identity — but without turning the platform unsafe.**
->Here's the link to the app: https://controlled-anonymity.vercel.app/
+
+Here's the link to the app: https://controlled-anonymity.vercel.app/
 
 This project explores how privacy and safety can coexist using **Controlled Anonymity**.
 
